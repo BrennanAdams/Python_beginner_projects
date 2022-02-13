@@ -1,35 +1,47 @@
+# - Author: Brennan Adams
+
+from math import ceil
 import random
 
-top_of_range = input("Type a number: ")
+#lower and upper bounds of random function
+ceiling = 15
+floor = 0
 
-if top_of_range.isdigit():
-    top_of_range = int(top_of_range)
+#asking for generating a random int and getting user input
+randomNum = random.randint(floor, ceiling)
 
-    if top_of_range <= 0:
-        print('Please type a number larger than 0 next time.')
-        quit()
-else:
-    print('Please type a number next time.')
-    quit()
+userInput = int(input("Guess a number between " + str(floor) + " and " + str(ceiling) + " : "))
+numAttempts = 1
 
-random_number = random.randint(0, top_of_range)
-guesses = 0
+#check if user entered in range
+while(userInput > ceiling or userInput < floor):
+    print()
+    userInput = int(input("Please enter a value between " + str(floor) + " and  " + str(ceiling)+ " : "))
 
-while True:
-    guesses += 1
-    user_guess = input("Make a guess: ")
-    if user_guess.isdigit():
-        user_guess = int(user_guess)
+
+
+#while loop to keep asking for input untill user guesses number
+while(userInput != randomNum):
+
+    #user guessed number
+    if userInput == randomNum:
+        print("You guessed the random number!")
+    
+    #input is lower than random number
+    elif userInput < randomNum:
+        print("Higer")
+        numAttempts += 1
+    #input is higher than random number
     else:
-        print('Please type a number next time.')
-        continue
+        print("Lower")
+        numAttempts += 1
+    
+    userInput = int(input("Try entering a new number : "))
+    
 
-    if user_guess == random_number:
-        print("You got it!")
-        break
-    elif user_guess > random_number:
-        print("You were above the number!")
-    else:
-        print("You were below the number!")
 
-print("You got it in", guesses, "guesses")
+print("\n Game finished! \n You finished in " + str(numAttempts) + "\n")
+
+
+
+

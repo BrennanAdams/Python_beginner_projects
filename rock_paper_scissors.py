@@ -1,39 +1,58 @@
+# Author - Brennan Adams
+
 import random
 
-user_wins = 0
-computer_wins = 0
-
+#creating number of user and cpu choices
 options = ["rock", "paper", "scissors"]
 
+userScore = 0
+cpuScore = 0
+rounds = 0
+
+print("Welcome to rock, paper, scissors!\n")
+
+
 while True:
-    user_input = input("Type Rock/Paper/Scissors or Q to quit: ").lower()
-    if user_input == "q":
+    userChoice = input("Type rock, paper, or scissors or Q to quit : ").lower()
+
+    #if user wants to quit
+    if userChoice == "q":
         break
 
-    if user_input not in options:
+    #if user enters invalid choice, keep asking for an input
+    if userChoice not in options:
         continue
 
-    random_number = random.randint(0, 2)
-    # rock: 0, paper: 1, scissors: 2
-    computer_pick = options[random_number]
-    print("Computer picked", computer_pick + ".")
 
-    if user_input == "rock" and computer_pick == "scissors":
-        print("You won!")
-        user_wins += 1
+    cpuChoice = random.choice(options)
 
-    elif user_input == "paper" and computer_pick == "rock":
-        print("You won!")
-        user_wins += 1
+    print("\n CPU choose " + cpuChoice + "\n")
+    #if they throw same choice
+    if cpuChoice == userChoice:
+        print("Draw!\n")
+        continue
 
-    elif user_input == "scissors" and computer_pick == "paper":
-        print("You won!")
-        user_wins += 1
-
+    #if cpu wins, checks all cases
+    if (cpuChoice == "rock" and userChoice == "scissors") or (cpuChoice == "scissors" and userChoice == "paper") or (cpuChoice == "paper" and userChoice == "rock"):
+        print("CPU wins \n")
+        cpuScore += 1
+    #user wins
     else:
-        print("You lost!")
-        computer_wins += 1
+        print("User wins! \n")
+        userScore += 1
 
-print("You won", user_wins, "times.")
-print("The computer won", computer_wins, "times.")
-print("Goodbye!")
+    print("Game Score\nUser score: " + str(userScore) + "\nCPU score: " + str(cpuScore) + "\n")
+
+    #check if we have a winner
+    if userScore == 3:
+        print("User wins game!\n")
+        break
+    elif cpuScore == 3:
+        print("CPU wins game!\n")
+        break
+
+print("\nGame Over\n")
+
+        
+    
+
